@@ -1,13 +1,19 @@
 source('./file_reader.R')
 
-AccelerometerDataAnalyzer <- function() {
+runAnalysis = function() {
+  
+  dataAnalyzer <- AccelerometerDataAnalyzer()
+  dataAnalyzer$createTidyDataSet()
+}
+
+AccelerometerDataAnalyzer = function() {
   
   dataAnalyzer = list()
   fileReader <- FileReader()
   
   dataAnalyzer$createTidyDataSet = function() {
     
-    measurements <- rbind(fileReader$readMeasurementTrainningTable(), fileReader$readMeasurementTestTable())
+    measurements <- rbind(fileReader$readMeasurementTrainningTable(), fileReader$readMeasurementTestTable())    
     measurements <- defineFeatureLabels(fileReader$readFeaturesTable(), measurements)
     measurements <- removeUnwantedFields(measurements)
     
@@ -18,8 +24,8 @@ AccelerometerDataAnalyzer <- function() {
     subject <- defineSubjectFriendlyColumnName(subject)
     
     data <- cbind(subject, activities, measurements)
-    tidyData <- aggregateRawDataByActivityAndSubject(data)
-    
+  
+    tidyData <- aggregateDataByActivityAndSubject(data)
     saveTidyData(tidyData)
     tidyData
   }
@@ -43,7 +49,7 @@ AccelerometerDataAnalyzer <- function() {
   defineSubjectFriendlyColumnName = function(subject) {
     setNames(subject, c("subject"))
   }
-  aggregateRawDataByActivityAndSubject = function(data) {
+  aggregateDataByActivityAndSubject = function(data) {
     tidyData <- aggregate(data, by=list(activity = data$activityName, subjectId=data$subject), mean)
     tidyData$activityName <- NULL
     tidyData$subject <- NULL
