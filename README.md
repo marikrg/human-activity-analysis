@@ -19,14 +19,14 @@ These are five steps to create the tidy data set:
 ## The project
 
 ### run_analysis.R
-The script https://github.com/marikrg/human-activity-analysis/blob/master/run_analysis.R is responsible for doing the analysis, collecting, working with, and cleaning a data set. As result, we have a tidy data to downstream analysis.
+The script [run_analysis.R](https://github.com/marikrg/human-activity-analysis/blob/master/run_analysis.R) is responsible for doing the analysis, collecting, working with, and cleaning a data set. As result, we have a tidy data to downstream analysis.
 
 ### file_reader.R
-The script https://github.com/marikrg/human-activity-analysis/blob/master/file_reader.R reads the text files.
+The script [file_reader.R](https://github.com/marikrg/human-activity-analysis/blob/master/file_reader.R) reads the text files.
 
 ### Codebook.md
 
-https://github.com/marikrg/human-activity-analysis/blob/master/Codebook.md has information about the variables in the data set not contained in the tidy data, the summary choices made and the experimental study design used.
+[Codebook.md](https://github.com/marikrg/human-activity-analysis/blob/master/Codebook.md) has information about the variables in the data set not contained in the tidy data, the summary choices made and the experimental study design used.
 
 ## Running the script:
 
@@ -38,4 +38,4 @@ https://github.com/marikrg/human-activity-analysis/blob/master/Codebook.md has i
 
 ## The tidy data
 
-Calling the function ```runAnalysis()``` the tidy data generated is saved on a text file in the working directory named tidy_data.txt.
+Calling the function ```runAnalysis()``` the tidy data generated is saved on a text file named tidy_data.txt in the working directory.
