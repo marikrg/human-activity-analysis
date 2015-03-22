@@ -75,7 +75,7 @@ This files are read and then the method rbind is called to join vertically the t
 
 ####Using descriptive activity names
 
-The activities_label.txt file is read to obtain the activity labels. An ID-label map is created and for each activity observation the activity number is replaced by the activity label.
+The activities_label.txt file is read to obtain the activity labels. An ID-label map is created and for each activity observation the activity ID is replaced by the activity label.
 
 ```text
 'data.frame':	10299 obs. of  1 variable:
@@ -111,7 +111,7 @@ The data created on the previous steps are merged using the cbind function:
 
 ####Creating the tidy data set 
 
-The tidy data set with the average of each variable for each activity and each subject is created calling the function ```aggregate(data, by=list(activity = data$activityName, subjectId=data$subject), mean)```. This function aggregates the data grouping by activity name and subject. It also applys the mean function for the variables in each group. 
+The tidy data set with the average of each variable grouped by activity and subject is created calling the function ```aggregate(data, by=list(activity = data$activityName, subjectId=data$subject), mean)```. This function aggregates the data grouping by activity name and subject. It also applys the mean function for the variables in each group. 
 
 The final result is a tidy data set with 180 observations of 68 variables:
 
