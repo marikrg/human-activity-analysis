@@ -16,6 +16,18 @@ These are five steps to create the tidy data set:
 4. Appropriately labels the data set with descriptive variable names. 
 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
+## Running the script
+
+1. Download the file from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+2. Unzip the content in the project directory
+3. Set the project directory as the working directory
+4. Run the command ```source('./file_reader.R')``` and ```source('./run_analysis.R')```
+5. Run the function ```runAnalysis()```
+
+## The tidy data
+
+Calling the function ```runAnalysis()``` the tidy data generated is saved on a text file named tidy_data.txt in the working directory.
+
 ## The project
 
 ### run_analysis.R
@@ -23,44 +35,44 @@ The script [run_analysis.R](https://github.com/marikrg/human-activity-analysis/b
 
 The public function createTidyDataSet is the main function in the application, responsible for:
 
-- Reads the measurement test set and training set and joins vertically these two data sets
+1. Reads the measurement test set and training set and joins vertically these two data sets
 
 ```R
 measurements <- rbind(fileReader$readMeasurementTrainningTable(), fileReader$readMeasurementTestTable())
 ```
 
-- Setting meaninful names for the measurement variables
+2. Setting meaninful names for the measurement variables
 
 ```R
 measurements <- defineFeatureLabels(fileReader$readFeaturesTable(), measurements)
 ```
 
-- All measurement variables that don't match 'mean()' and 'std()' are being removed.
+3. All measurement variables that don't match 'mean()' and 'std()' are being removed.
 
 ```R
 measurements <- removeUnwantedFields(measurements)
 ````
 
-- Reads the activity test set and training set and joins vertically these two data sets
+4. Reads the activity test set and training set and joins vertically these two data sets
 
 ```R
 activities <- rbind(fileReader$readActivityTrainningTable(), fileReader$readActivityTestTable())
 ```
 
-- An ID-label map is created and for each activity observation the activity ID is replaced by the activity label.
+5. An ID-label map is created and for each activity observation the activity ID is replaced by the activity label.
 
 ```R
 activities <- defineActivityLabelByID(activities, fileReader$readActivityLabelsTable())
 ```
 
-- Reads the subject test set and training set and joins vertically these two data sets
+6. Reads the subject test set and training set and joins vertically these two data sets
 
 ```R
 subject <- rbind(fileReader$readSubjectTrainningTable(), fileReader$readSubjectTestTable())
 subject <- defineSubjectFriendlyColumnName(subject)
 ```
 
-- The tidy data set with the average of each variable grouped by activity and subject is created calling the function ```aggregate(data, by=list(activity = data$activityName, subjectId=data$subject), mean)```. This function aggregates the data grouping by activity name and subject. It also applys the mean function for the variables in each group.
+7. The tidy data set with the average of each variable grouped by activity and subject is created calling the function ```aggregate(data, by=list(activity = data$activityName, subjectId=data$subject), mean)```. This function aggregates the data grouping by activity name and subject. It also applys the mean function for the variables in each group.
 
 ```R
 tidyData <- aggregateDataByActivityAndSubject(data)
@@ -73,15 +85,3 @@ The script [file_reader.R](https://github.com/marikrg/human-activity-analysis/bl
 ### Codebook.md
 
 [Codebook.md](https://github.com/marikrg/human-activity-analysis/blob/master/Codebook.md) has information about the variables in the data set not contained in the tidy data, the summary choices made and the experimental study design used.
-
-## Running the script
-
-1. Download the file from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
-2. Unzip the content in the project directory
-3. Set the project directory as the working directory
-4. Run the command ```source('./file_reader.R')``` and ```source('./run_analysis.R')```
-5. Run the function ```runAnalysis()```
-
-## The tidy data
-
-Calling the function ```runAnalysis()``` the tidy data generated is saved on a text file named tidy_data.txt in the working directory.
