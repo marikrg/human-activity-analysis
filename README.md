@@ -35,44 +35,44 @@ The script [run_analysis.R](https://github.com/marikrg/human-activity-analysis/b
 
 The public function createTidyDataSet is the main function in the application, responsible for:
 
-1. Reads the measurement test set and training set and joins vertically these two data sets
+- Reads the measurement test set and training set and joins vertically these two data sets
 
 ```R
 measurements <- rbind(fileReader$readMeasurementTrainningTable(), fileReader$readMeasurementTestTable())
 ```
 
-2. Setting meaninful names for the measurement variables
+- Setting meaninful names for the measurement variables
 
 ```R
 measurements <- defineFeatureLabels(fileReader$readFeaturesTable(), measurements)
 ```
 
-3. All measurement variables that don't match 'mean()' and 'std()' are being removed.
+- All measurement variables that don't match 'mean()' and 'std()' are being removed.
 
 ```R
 measurements <- removeUnwantedFields(measurements)
 ````
 
-4. Reads the activity test set and training set and joins vertically these two data sets
+- Reads the activity test set and training set and joins vertically these two data sets
 
 ```R
 activities <- rbind(fileReader$readActivityTrainningTable(), fileReader$readActivityTestTable())
 ```
 
-5. An ID-label map is created and for each activity observation the activity ID is replaced by the activity label.
+- An ID-label map is created and for each activity observation the activity ID is replaced by the activity label.
 
 ```R
 activities <- defineActivityLabelByID(activities, fileReader$readActivityLabelsTable())
 ```
 
-6. Reads the subject test set and training set and joins vertically these two data sets
+- Reads the subject test set and training set and joins vertically these two data sets
 
 ```R
 subject <- rbind(fileReader$readSubjectTrainningTable(), fileReader$readSubjectTestTable())
 subject <- defineSubjectFriendlyColumnName(subject)
 ```
 
-7. The tidy data set with the average of each variable grouped by activity and subject is created calling the function ```aggregate(data, by=list(activity = data$activityName, subjectId=data$subject), mean)```. This function aggregates the data grouping by activity name and subject. It also applys the mean function for the variables in each group.
+- The tidy data set with the average of each variable grouped by activity and subject is created calling the function ```aggregate(data, by=list(activity = data$activityName, subjectId=data$subject), mean)```. This function aggregates the data grouping by activity name and subject. It also applys the mean function for the variables in each group.
 
 ```R
 tidyData <- aggregateDataByActivityAndSubject(data)
