@@ -1,4 +1,4 @@
-source('file_reader.R')
+source('utils/file_reader.R')
 source('measurements.R')
 source('activities.R')
 source('subjects.R')
@@ -37,7 +37,7 @@ AccelerometerDataAnalyzer = function() {
     tidyData
   }
   saveTidyData = function(tidyData) {
-    write.table(tidyData, "./tidy_data.txt", row.name=FALSE)
+    write.table(tidyData, "../data/tidy_data.txt", row.name=FALSE)
   }
   class(dataAnalyzer) <- 'AccelerometerDataAnalyzer'
   dataAnalyzer

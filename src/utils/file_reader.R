@@ -2,7 +2,7 @@ FileReader <- function() {
   
   fileReader = list()
   
-  dataDirectory <- "./UCI HAR Dataset"
+  dataDirectory <- "../data/UCI HAR Dataset"
   trainDirectory <- paste(dataDirectory, sep="/", "train")
   testDirectory <- paste(dataDirectory, sep="/", "test")
   
