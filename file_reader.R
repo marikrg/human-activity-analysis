@@ -1,34 +1,22 @@
 FileReader <- function() {
   
+  fileReader = list()
+  
   dataDirectory <- "./UCI HAR Dataset"
   trainDirectory <- paste(dataDirectory, sep="/", "train")
   testDirectory <- paste(dataDirectory, sep="/", "test")
   
-  fileReader = list()
+  measurementsTestFile <<- paste(testDirectory, sep="/", "X_test.txt")
+  activitiesTestFile <<- paste(testDirectory, sep="/", "Y_test.txt")
+  subjectsTestFile <<- paste(testDirectory, sep="/", "subject_test.txt")
+  measurementsTrainningFile <<- paste(trainDirectory, sep="/", "X_train.txt")
+  activitiesTrainningFile <<- paste(trainDirectory, sep="/", "Y_train.txt")
+  subjectsTrainningFile <<- paste(trainDirectory, sep="/", "subject_train.txt")
+  featuresFile <<- paste(dataDirectory, sep="/", "features.txt")
+  activityLabelsFile <<- paste(dataDirectory, sep="/", "activity_labels.txt")
   
-  fileReader$readMeasurementTestTable = function() {
-    read.table(paste(testDirectory, sep="/", "X_test.txt"))
-  }
-  fileReader$readActivityTestTable = function() {
-    read.table(paste(testDirectory, sep="/", "Y_test.txt"))
-  }
-  fileReader$readSubjectTestTable = function() {
-    read.table(paste(testDirectory, sep="/", "subject_test.txt"))
-  }
-  fileReader$readMeasurementTrainningTable = function() {
-    read.table(paste(trainDirectory, sep="/", "X_train.txt"))
-  }
-  fileReader$readActivityTrainningTable = function() {
-    read.table(paste(trainDirectory, sep="/", "Y_train.txt"))
-  }
-  fileReader$readSubjectTrainningTable = function() {
-    read.table(paste(trainDirectory, sep="/", "subject_train.txt"))
-  }
-  fileReader$readFeaturesTable = function() {
-    read.table(paste(dataDirectory, sep="/", "features.txt"))
-  }
-  fileReader$readActivityLabelsTable = function() {
-    read.table(paste(dataDirectory, sep="/", "activity_labels.txt"))
+  fileReader$read = function(filename) {
+    read.table(filename)
   }
   class(fileReader) <- 'FileReader'
   fileReader
